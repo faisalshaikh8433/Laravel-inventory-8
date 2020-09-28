@@ -19,4 +19,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/', function () {
         return view('dashboard');
     })->name('dashboard');
+
+    Route::get('/sale', function () {
+        return view('sales.index');
+    })->name('sale');
 });
