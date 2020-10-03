@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
+use App\Http\Requests\CustomerStoreRequest;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class CustomerController extends Controller
 {
@@ -14,7 +16,8 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        //
+        $customers = Customer::paginate(10);
+        return view('customers.index', compact('customers'));
     }
 
     /**
@@ -24,7 +27,7 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        //
+        return view('customers.create');
     }
 
     /**
@@ -35,7 +38,14 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name'=> 'required|unique:customers',
+            'contact_number'=> 'required',
+            'email'=> 'nullable|email|unique:customers'
+        ]);
+
+        Customer::create($request->all());
+        return redirect('/customers')->with('success', 'Customer Added!');
     }
 
     /**
@@ -57,7 +67,7 @@ class CustomerController extends Controller
      */
     public function edit(Customer $customer)
     {
-        //
+        return view('customers.edit', compact('customer'));
     }
 
     /**
@@ -69,7 +79,21 @@ class CustomerController extends Controller
      */
     public function update(Request $request, Customer $customer)
     {
-        //
+        $request->validate([
+            'name'=> [
+                'required',
+                Rule::unique('customers')->ignore($customer)
+            ],
+            'contact_number'=> 'required',
+            'email'=> [
+                'nullable',
+                'email',
+                Rule::unique('customers')->ignore($customer)
+            ]
+        ]);
+
+        $customer->update($request->all());
+        return redirect('/customers')->with('success', 'Customer updated!');
     }
 
     /**
@@ -80,6 +104,7 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
-        //
+        $customer->delete();
+        return redirect('/customers')->with('notice', 'Customer Record Deleted!');
     }
 }

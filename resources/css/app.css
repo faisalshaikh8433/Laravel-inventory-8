@@ -1,3 +1,87 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+
+.btn {
+    @apply inline-flex items-center px-3 py-2 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest transition ease-in-out duration-150;
+}
+
+.btn:disabled {
+    @apply opacity-25;
+}
+
+.btn-group {
+    @apply flex justify-end items-center;
+}
+
+.btn-primary {
+    @apply bg-indigo-900;
+}
+
+.btn-primary:focus {
+    @apply outline-none border-indigo-900 shadow-outline-indigo;
+}
+
+.btn-primary:hover {
+    @apply bg-indigo-700;
+}
+
+.btn-success {
+    @apply bg-green-600;
+}
+
+.btn-success:focus {
+    @apply outline-none border-green-600 shadow-outline-green;
+}
+
+.btn-success:hover {
+    @apply bg-green-400;
+}
+
+.btn-secondary {
+    @apply bg-gray-900;
+}
+
+.btn-secondary:focus {
+    @apply outline-none border-gray-900 shadow-outline-gray;
+}
+
+.btn-secondary:hover {
+    @apply bg-gray-700;
+}
+
+.btn-red {
+    @apply bg-red-600;
+}
+
+.btn-red:focus {
+    @apply outline-none border-red-600 shadow-outline-red;
+}
+
+.btn-red:hover {
+    @apply bg-red-400;
+}
+
+.btn-yellow {
+    @apply bg-yellow-400;
+}
+
+.btn-yellow:focus {
+    @apply outline-none border-yellow-400 shadow-outline-yellow;
+}
+
+.btn-yellow:hover {
+    @apply bg-yellow-200;
+}
+
+.btn-group {
+    @apply flex justify-end items-center;
+}
+
+.table th {
+    @apply px-4 py-3 bg-teal-50 text-left text-xs leading-4 font-bold text-gray-500 uppercase tracking-wider;
+}
+
+.table td {
+    @apply px-4 py-2 whitespace-no-wrap text-sm leading-5 font-medium text-gray-900;
+}

@@ -1,19 +1,27 @@
-const defaultTheme = require('tailwindcss/defaultTheme');
+const defaultTheme = require("tailwindcss/defaultTheme");
 
 module.exports = {
-    purge: ['./storage/framework/views/*.php', './resources/views/**/*.blade.php'],
+    important: true,
+    future: {
+        removeDeprecatedGapUtilities: true,
+        purgeLayersByDefault: true
+    },
+    purge: [
+        "./storage/framework/views/*.php",
+        "./resources/views/**/*.blade.php"
+    ],
 
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Nunito', ...defaultTheme.fontFamily.sans],
-            },
-        },
+                sans: ["Nunito", ...defaultTheme.fontFamily.sans]
+            }
+        }
     },
 
     variants: {
-        opacity: ['responsive', 'hover', 'focus', 'disabled'],
+        opacity: ["responsive", "hover", "focus", "disabled"]
     },
 
-    plugins: [require('@tailwindcss/ui')],
+    plugins: [require("@tailwindcss/ui")]
 };
