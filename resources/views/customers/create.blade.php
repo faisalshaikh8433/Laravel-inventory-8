@@ -68,6 +68,11 @@
                             value="{{ old('gstno') }}" />
                         <x-input-error for="gstno" class="mt-1" />
                     </div>
+                    <div class="col-span-12 md:col-span-6 flex items-center">
+                        <x-label for="active" value="Active" />
+                        <input id="active" type="checkbox" name="active" class="ml-2 form-checkbox"
+                            value="1" checked/>
+                    </div>
                 </div>
             </x-card-body>
             <x-card-footer>

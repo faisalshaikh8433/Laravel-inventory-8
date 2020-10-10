@@ -44,6 +44,9 @@ class CustomerController extends Controller
             'email'=> 'nullable|email|unique:customers'
         ]);
 
+        $request->merge([
+            'active' => $request->input('active', 0)
+        ]);
         Customer::create($request->all());
         return redirect('/customers')->with('success', 'Customer Added!');
     }
@@ -92,8 +95,12 @@ class CustomerController extends Controller
             ]
         ]);
 
+        $request->merge([
+            'active' => $request->input('active', 0)
+        ]);
+
         $customer->update($request->all());
-        return redirect('/customers')->with('success', 'Customer updated!');
+        return redirect('/customers')->with('success', 'Customer Updated!');
     }
 
     /**

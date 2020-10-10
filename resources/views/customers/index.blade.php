@@ -15,6 +15,7 @@
                         <th>Name</th>
                         <th>Contact No.</th>
                         <th>Email</th>
+                        <th>Active</th>
                         <th class="text-right">Actions</th>
                     </tr>
                 </x-slot>
@@ -24,6 +25,9 @@
                         <td>{{$customer->name}}</td>
                         <td>{{$customer->contact_number}}</td>
                         <td>{{$customer->email}}</td>
+                        <td>
+                            <x-badge boolean="{{$tax->active}}"/>
+                        </td>
                         <td>
                             <div class="btn-group">
                                 <a href="{{route('customers.edit', $customer->id)}}"

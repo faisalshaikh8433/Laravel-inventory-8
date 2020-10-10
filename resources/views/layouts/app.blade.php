@@ -42,6 +42,20 @@
                             <x-jet-nav-link href="/customers" :active="request()->routeIs('customers')">
                                 Customer
                             </x-jet-nav-link>
+                            <x-jet-nav-link href="/taxes" :active="request()->routeIs('taxes')">
+                                Tax
+                            </x-jet-nav-link>
+                            <x-jet-dropdown align="right" width="48">
+                                <x-slot name="trigger">
+                                </x-slot>
+
+                                <x-slot name="content">
+                                    <!-- Account Management -->
+                                    <div class="block px-4 py-2 text-xs text-gray-400">
+                                        {{ __('Manage Account') }}
+                                    </div>
+                                </x-slot>
+                            </x-jet-dropdown>
                         </div>
                     </div>
 

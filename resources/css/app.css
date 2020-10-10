@@ -79,9 +79,9 @@
 }
 
 .table th {
-    @apply px-4 py-3 bg-teal-50 text-left text-xs leading-4 font-bold text-gray-500 uppercase tracking-wider;
+    @apply px-5 py-3 bg-teal-50 text-left text-xs leading-4 font-bold text-gray-500 uppercase tracking-wider;
 }
 
 .table td {
-    @apply px-4 py-2 whitespace-no-wrap text-sm leading-5 font-medium text-gray-900;
+    @apply px-5 py-2 whitespace-no-wrap text-sm leading-5 font-medium text-gray-900;
 }
