@@ -2,33 +2,33 @@
     <x-card>
         <x-card-header>
             <x-page-heading>
-                Edit Tax
+                Edit Product Group
             </x-page-heading>
         </x-card-header>
-        <x-form action="{{ route('taxes.update', $tax) }}" method="PUT">
+        <x-form action="{{ route('product_groups.update', $productGroup) }}" method="PUT">
             <x-card-body>
                 <div class="grid grid-cols-12 gap-2">
                     <div class="col-span-12 md:col-span-6">
-                        <x-label for="hsncode" value="Hsncode" />
-                        <x-input id="hsncode" type="text" name="hsncode" class="mt-1 block w-full"
-                            value="{{ $tax->hsncode }}" />
-                        <x-input-error for="hsncode" class="mt-1" />
+                        <x-label for="name" value="Name" />
+                        <x-input id="name" type="text" name="name" class="mt-1 block w-full"
+                            value="{{ $productGroup->name }}" />
+                        <x-input-error for="name" />
                     </div>
                     <div class="col-span-12 md:col-span-6">
-                        <x-label for="gst_percent" value="Gst Percentage" />
-                        <x-input id="gst_percent" type="text" name="gst_percent" class="mt-1 block w-full"
-                            value="{{ $tax->gst_percent }}" />
-                        <x-input-error for="gst_percent" class="mt-1" />
+                        <x-label for="tax_id" value="Tax" />
+                        <select name="tax_id" id="tax_id" class="form-select w-full mt-1">
+                            <option value="">select an option</option>
+                            @foreach ($taxes as $tax)
+                            <option value="{{$tax->id}}" {{($tax->id === $productGroup->tax_id) ? 'selected': ''}}>
+                                {{$tax->displayName()}}</option>
+                            @endforeach
+                        </select>
+                        <x-input-error for="tax_id" custom-message="Tax is required" />
                     </div>
                     <div class="col-span-12 md:col-span-6 flex items-center">
                         <x-label for="active" value="Active" />
-                        {{-- @if ($tax->active)
-                             <x-input id="active" type="checkbox" name="active" class="ml-2 form-checkbox" value="1" checked/>
-                        @else
-                            <x-input id="active" type="checkbox" name="active" class="ml-2 form-checkbox" value="1" />
-                        @endif --}}
-                        <input id="active" type="checkbox" name="active" class="ml-2 form-checkbox"
-                            value="1" {{($tax->active == 1 ? "checked" : '')}}/>
+                        <input id="active" type="checkbox" name="active" class="ml-2 form-checkbox" value="1"
+                            {{($productGroup->active == 1 ? "checked" : '')}} />
                     </div>
                 </div>
             </x-card-body>

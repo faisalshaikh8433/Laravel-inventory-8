@@ -26,7 +26,7 @@
                         <td>{{$customer->contact_number}}</td>
                         <td>{{$customer->email}}</td>
                         <td>
-                            <x-badge boolean="{{$tax->active}}"/>
+                            <x-badge boolean="{{$customer->active}}" />
                         </td>
                         <td>
                             <div class="btn-group">

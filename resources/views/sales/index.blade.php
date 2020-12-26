@@ -1,36 +1,46 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Customers
-        </h2>
-    </x-slot>
-
-    <div class="py-2">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-auto shadow-xl sm:rounded-lg p-4">
-                <div class="grid grid-cols-12 gap-2">
-                    <div class="col-span-3 lg:col-span-2">
-                        <x-jet-label for="invoice_no" value="Invoice No" />
-                        <x-jet-input id="invoice_no" type="text" class="mt-1 block w-full"/>
-                        <x-jet-input-error for="invoice_no" class="mt-1" />
-                    </div>
-                    <div class="col-span-4 lg:col-span-3">
-                        <x-jet-label for="date" value="Date" />
-                        <x-jet-input id="date" type="text" class="mt-1 block w-full"/>
-                        <x-jet-input-error for="date" class="mt-1" />
-                    </div>
-                    <div class="col-span-5 lg:col-span-5">
-                        <x-jet-label for="customer" value="Customer" />
-                        <x-jet-input id="customer" type="text" class="mt-1 block w-full"/>
-                        <x-jet-input-error for="customer" class="mt-1" />
-                    </div>
-                    <div class="col-span-3 lg:col-span-2">
-                        <x-jet-label for="gst_type" value="Gst Type" />
-                        <x-jet-input id="gst_type" type="text" class="mt-1 block w-full"/>
-                        <x-jet-input-error for="gst_type" class="mt-1" />
-                    </div>
-                </div>
+    <x-card>
+        <x-card-header>
+            <x-page-heading>
+                Sales
+            </x-page-heading>
+            <div class="btn-group">
+                <a class="btn btn-primary" href="{{ route('sales.create') }}">Add New</a>
             </div>
-        </div>
-    </div>
+        </x-card-header>
+        <x-card-body>
+            <x-table class="table">
+                <x-slot name="thead">
+                    <tr>
+                        <th>Date</th>
+                        <th>Customer</th>
+                        <th>Total Amount</th>
+                        <th>Actions</th>
+                    </tr>
+                </x-slot>
+                <x-slot name="tbody">
+                    @foreach ($sales as $sale)
+                    <tr>
+                        <td>{{$sale->date}}</td>
+                        <td>{{$sale->customer->name}}</td>
+                        <td>{{$sale->total_amount}}</td>
+                        <td>
+                            <x-badge boolean="{{$sale->active}}" />
+                        </td>
+                        <td>
+                            <div class="btn-group">
+                                <a href="{{route('sales.edit', $sale->id)}}"
+                                    class="btn btn-yellow rounded-r-none">Edit</a>
+                                <x-form action="{{ route('sales.destroy', $sale->id) }}" method="DELETE"
+                                    onsubmit="return confirm('Are you sure you want to delete ?')">
+                                    <input type="submit" value="Delete" class="btn btn-red rounded-l-none">
+                                </x-form>
+                            </div>
+                        </td>
+                    </tr>
+                    @endforeach
+                </x-slot>
+            </x-table>
+        </x-card-body>
+    </x-card>
 </x-app-layout>

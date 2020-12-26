@@ -19,4 +19,9 @@ class Product extends Model
     {
         return $this->belongsTo(ProductGroup::class);
     }
+    
+    public function saleItem()
+    {
+        $this->belongsTo(SaleItem::class);
+    }
 }

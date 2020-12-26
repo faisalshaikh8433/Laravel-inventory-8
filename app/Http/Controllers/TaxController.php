@@ -15,7 +15,7 @@ class TaxController extends Controller
      */
     public function index()
     {
-        $taxes = Tax::paginate(10);
+        $taxes = Tax::latest()->paginate(10);
         return view('taxes.index', compact('taxes'));
     }
 
@@ -108,6 +108,9 @@ class TaxController extends Controller
      */
     public function destroy(Tax $tax)
     {
+        if ($tax->productGroups()->exists()) {
+            return redirect('/taxes')->with('notice', 'Cannot delete this record it is used in Product Groups');
+        }
         $tax->delete();
         return redirect('/taxes')->with('notice', 'Tax Record Deleted!');
     }

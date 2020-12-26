@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ProductGroup;
+use App\Models\Tax;
 use Illuminate\Http\Request;
 
 class ProductGroupController extends Controller
@@ -14,7 +15,8 @@ class ProductGroupController extends Controller
      */
     public function index()
     {
-        //
+        $productGroups = ProductGroup::with('tax')->latest()->paginate(10);
+        return view('product_groups.index', compact('productGroups'));
     }
 
     /**
@@ -24,7 +26,8 @@ class ProductGroupController extends Controller
      */
     public function create()
     {
-        //
+        $taxes = Tax::cursor();
+        return view('product_groups.create', compact('taxes'));
     }
 
     /**
@@ -35,7 +38,15 @@ class ProductGroupController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name'=> 'required|unique:product_groups',
+            'tax_id'=>'required'
+        ]);
+        $request->merge([
+            'active' => $request->input('active', 0)
+        ]);
+        ProductGroup::create($request->all());
+        return redirect('/product_groups')->with('success', 'Product Group Added!');
     }
 
     /**
@@ -57,7 +68,8 @@ class ProductGroupController extends Controller
      */
     public function edit(ProductGroup $productGroup)
     {
-        //
+        $taxes = Tax::cursor();
+        return view('product_groups.edit', compact('taxes', 'productGroup'));
     }
 
     /**
@@ -69,7 +81,18 @@ class ProductGroupController extends Controller
      */
     public function update(Request $request, ProductGroup $productGroup)
     {
-        //
+        $request->validate([
+            'name'=> [
+                'required',
+                Rule::unique('product_groups')->ignore($productGroup)
+            ],
+            'tax_id'=>'required'
+        ]);
+        $request->merge([
+            'active' => $request->input('active', 0)
+        ]);
+        $productGroup->update($request->all());
+        return redirect('/product_groups')->with('success', 'Product Group Updated!');
     }
 
     /**
@@ -80,6 +103,7 @@ class ProductGroupController extends Controller
      */
     public function destroy(ProductGroup $productGroup)
     {
-        //
+        $productGroup->delete();
+        return redirect('/product_groups')->with('notice', 'Product Group Record Deleted!');
     }
 }

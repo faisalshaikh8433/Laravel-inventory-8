@@ -45,6 +45,12 @@
                             <x-jet-nav-link href="/taxes" :active="request()->routeIs('taxes')">
                                 Tax
                             </x-jet-nav-link>
+                            <x-jet-nav-link href="/product_groups" :active="request()->routeIs('product_groups')">
+                                Product Group
+                            </x-jet-nav-link>
+                            <x-jet-nav-link href="/products" :active="request()->routeIs('products')">
+                                Products
+                            </x-jet-nav-link>
                             <x-jet-dropdown align="right" width="48">
                                 <x-slot name="trigger">
                                 </x-slot>
