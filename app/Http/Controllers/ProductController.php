@@ -16,7 +16,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::with(['tax', 'product_group'])->latest()->paginate(10);
+        $products = Product::with(['tax', 'productGroup'])->latest()->paginate(10);
         return view('products.index', compact('products'));
     }
 

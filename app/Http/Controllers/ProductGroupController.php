@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ProductGroup;
 use App\Models\Tax;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class ProductGroupController extends Controller
 {
