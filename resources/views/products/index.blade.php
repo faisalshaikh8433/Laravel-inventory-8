@@ -2,7 +2,7 @@
     <x-card>
         <x-card-header>
             <x-page-heading>
-                Product Groups
+                Products
             </x-page-heading>
             <div class="btn-group">
                 <a class="btn btn-primary" href="{{ route('products.create') }}">Add New</a>

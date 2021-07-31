@@ -75,7 +75,7 @@ class ProductController extends Controller
     {
         $taxes = Tax::cursor();
         $productGroups = ProductGroup::cursor();
-        return view('product_groups.edit', compact('taxes', 'productGroups', 'Product'));
+        return view('products.edit', compact('taxes', 'productGroups', 'product'));
     }
 
     /**

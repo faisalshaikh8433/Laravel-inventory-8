@@ -14,7 +14,8 @@ class SaleController extends Controller
      */
     public function index()
     {
-        //
+        $sales = Sale::with(['customer'])->paginate(10);
+        return view('sales.index', compact('sales'));
     }
 
     /**
@@ -24,7 +25,7 @@ class SaleController extends Controller
      */
     public function create()
     {
-        //
+        return view('sales.create');
     }
 
     /**
@@ -35,7 +36,17 @@ class SaleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request);
+        $request->validate([
+            'sale_at' => 'required',
+            'customer' => 'required',
+            'items.*.product' => 'required',
+            'items.*.rate' => 'required|regex:/^\d+(\.\d{1,2})?$/',
+            'items.*.qty' => 'required|regex:/^\d+(\.\d{1,2})?$/',
+        ]);
+
+        Sale::create($request->all());
+        return redirect('/sales')->with('success', 'Sale Added!');
     }
 
     /**

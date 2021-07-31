@@ -10,14 +10,14 @@
                 <div class="grid grid-cols-12 gap-2">
                     <div class="col-span-12 md:col-span-6">
                         <x-label for="name" value="Name" />
-                        <x-input id="name" type="text" name="name" value="{{ old('name') }}" />
+                        <x-input id="name" type="text" name="name" class="mt-1 w-full" value="{{ old('name') }}" />
                         <x-input-error for="name" />
                     </div>
                     <div class="col-span-12 md:col-span-6">
                         <x-label for="product_group_id" value="Product Group" />
                         <select name="product_group_id" id="product_group_id" class="form-select w-full mt-1">
                             <option value="">select an option</option>
-                            @foreach ($productGroup as $pg)
+                            @foreach ($productGroups as $pg)
                             <option value="{{$pg->id}}">{{$pg->name}}</option>
                             @endforeach
                         </select>
@@ -33,15 +33,19 @@
                         </select>
                         <x-input-error for="tax_id" custom-message="Tax is required" />
                     </div>
-                    <div class="col-span-6">
+                    <div class="col-span-12 md:col-span-6">
                         <x-label for="rate" value="Rate" />
-                        <x-input id="rate" type="text" name="rate" value="{{ old('rate') }}" placeholder="0.00"/>
+                        <x-input id="rate" type="text" name="rate" class="mt-1 w-full" value="{{ old('rate') }}" placeholder="0.00"/>
                         <x-input-error for="rate" />
                     </div>
-                    <div class="col-span-6">
+                    <div class="col-span-12 md:col-span-6">
                         <x-label for="cost" value="Cost" />
-                        <x-input id="cost" type="text" name="cost" value="{{ old('cost') }}" placeholder="0.00"/>
+                        <x-input id="cost" type="text" name="cost" class="mt-1 w-full" value="{{ old('cost') }}" placeholder="0.00"/>
                         <x-input-error for="cost" />
+					</div>
+					<div class="col-span-12 md:col-span-6 flex items-center">
+                        <x-label for="active" value="Active" />
+                        <input id="active" type="checkbox" name="active" class="ml-2 form-checkbox" value="1" checked />
                     </div>
                 </div>
             </x-card-body>
